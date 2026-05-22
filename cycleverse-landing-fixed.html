@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cycleverse | Pro Cycling Newsletter</title>
+  <meta name="description" content="Join the Cycleverse professional cycling newsletter.">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --black: #080810;
+      --dark: #0d0d1a;
+      --dark2: #12121f;
+      --dark3: #1a1a2e;
+      --blue: #3b3bff;
+      --blue-bright: #6060ff;
+      --blue-glow: rgba(59,59,255,0.35);
+      --white: #ffffff;
+      --gray: #8888aa;
+      --green: #42d392;
+      --red: #ff8080;
+    }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Lora', Georgia, serif;
+      background: var(--black);
+      color: var(--white);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+    a { color: inherit; text-decoration: none; }
+    .orb { position:fixed;border-radius:50%;pointer-events:none;z-index:0;filter:blur(90px); }
+    .orb-1 { width:500px;height:500px;top:-150px;right:-100px;background:radial-gradient(circle,rgba(59,59,255,0.18) 0%,transparent 70%); }
+    .orb-2 { width:400px;height:400px;bottom:100px;left:-100px;background:radial-gradient(circle,rgba(59,59,255,0.1) 0%,transparent 70%); }
+    .page { position:relative;z-index:1;max-width:1100px;margin:0 auto;padding:0 2rem; }
+    nav { display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:2rem 0;border-bottom:1px solid rgba(59,59,255,0.15); }
+    .logo-wrap { display:flex;align-items:center;gap:0.75rem; }
+    .logo-icon { width:44px;height:44px;border-radius:50%;border:1.5px solid rgba(59,59,255,0.4);box-shadow:0 0 12px var(--blue-glow);display:flex;align-items:center;justify-content:center;background:rgba(59,59,255,0.1);flex-shrink:0; }
+    .logo-text { font-family:'Montserrat',sans-serif;font-size:1.3rem;font-weight:800;letter-spacing:0.04em;color:var(--white); }
+    .badge { font-family:'Montserrat',sans-serif;font-size:0.65rem;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:var(--blue-bright);border:1px solid rgba(59,59,255,0.3);padding:0.35rem 0.85rem;border-radius:2rem;white-space:nowrap; }
+    .hero { padding:5rem 0 3rem;display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center; }
+    .eyebrow { font-family:'Montserrat',sans-serif;font-size:0.7rem;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:var(--blue-bright);margin-bottom:1.2rem;display:flex;align-items:center;gap:0.6rem; }
+    .eyebrow::before { content:'';display:inline-block;width:28px;height:2px;background:var(--blue-bright);box-shadow:0 0 6px var(--blue-glow); }
+    h1 { font-family:'Montserrat',sans-serif;font-size:clamp(2.8rem,5.5vw,5rem);font-weight:900;line-height:1;letter-spacing:0;margin-bottom:1.5rem; }
+    h1 em { font-style:normal;color:var(--blue-bright);text-shadow:0 0 24px var(--blue-glow); }
+    .hero-desc { font-size:1.05rem;line-height:1.75;color:rgba(255,255,255,0.62);margin-bottom:2rem;max-width:460px; }
+    .stats { display:flex;gap:2rem;margin-bottom:2.5rem; }
+    .stat-num { font-family:'Montserrat',sans-serif;font-size:1.6rem;font-weight:800;color:var(--white);line-height:1; }
+    .stat-label { font-size:0.7rem;color:var(--gray);margin-top:0.2rem;font-family:'Montserrat',sans-serif;letter-spacing:0.06em;text-transform:uppercase; }
+    .divider-v { width:1px;background:rgba(59,59,255,0.2); }
+    .form-card { background:var(--dark2);border:1px solid rgba(59,59,255,0.2);border-top:2px solid var(--blue);padding:2.5rem;border-radius:4px;box-shadow:0 0 40px rgba(59,59,255,0.08);position:relative; }
+    .gift-tag { position:absolute;top:-1px;right:2rem;background:var(--blue);color:var(--white);font-family:'Montserrat',sans-serif;font-size:0.6rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;padding:0.4rem 0.9rem;border-radius:0 0 4px 4px; }
+    .form-title { font-family:'Montserrat',sans-serif;font-size:1.2rem;font-weight:800;letter-spacing:0.03em;margin-bottom:0.5rem; }
+    .form-sub { font-size:0.85rem;color:rgba(255,255,255,0.52);margin-bottom:1.8rem;line-height:1.6; }
+    .form-sub strong { color:var(--blue-bright); }
+    .input-group { margin-bottom:1rem; }
+    .input-group label { display:block;font-family:'Montserrat',sans-serif;font-size:0.65rem;letter-spacing:0.16em;text-transform:uppercase;color:var(--gray);margin-bottom:0.5rem; }
+    .input-group input, .input-group select {
+      width:100%;
+      background:var(--dark3);
+      border:1px solid rgba(59,59,255,0.15);
+      color:var(--white);
+      font-family:'Lora',serif;
+      font-size:0.95rem;
+      padding:0.85rem 1rem;
+      outline:none;
+      border-radius:3px;
+      transition:border-color 0.2s, box-shadow 0.2s;
+    }
+    .input-group input::placeholder { color:rgba(255,255,255,0.22); }
+    .input-group input:focus, .input-group select:focus { border-color:var(--blue);box-shadow:0 0 0 3px rgba(59,59,255,0.12); }
+    .btn-submit, .btn-secondary, .btn-danger {
+      width:100%;
+      border:none;
+      font-family:'Montserrat',sans-serif;
+      font-size:0.82rem;
+      font-weight:700;
+      letter-spacing:0.1em;
+      text-transform:uppercase;
+      padding:1rem;
+      cursor:pointer;
+      border-radius:3px;
+      transition:background 0.2s, box-shadow 0.2s, transform 0.1s;
+    }
+    .btn-submit { background:var(--blue);color:var(--white);box-shadow:0 0 20px rgba(59,59,255,0.3); }
+    .btn-submit:hover { background:var(--blue-bright);box-shadow:0 0 30px rgba(59,59,255,0.5); }
+    .btn-submit:active, .btn-secondary:active, .btn-danger:active { transform:scale(0.99); }
+    .btn-submit:disabled { opacity:0.6;cursor:not-allowed; }
+    .form-legal { font-size:0.68rem;color:rgba(255,255,255,0.28);margin-top:1rem;text-align:center;line-height:1.5; }
+    .message { display:none;border-radius:4px;padding:1rem;margin-top:1rem;font-size:0.8rem;text-align:center;font-family:'Montserrat',sans-serif;line-height:1.45; }
+    .message.error { background:rgba(255,50,50,0.1);border:1px solid rgba(255,50,50,0.3);color:var(--red); }
+    .message.success { background:rgba(66,211,146,0.1);border:1px solid rgba(66,211,146,0.35);color:var(--green); }
+    .magnet { border-top:1px solid rgba(59,59,255,0.1);padding:4rem 0;display:grid;grid-template-columns:1fr 1.5fr;gap:4rem;align-items:start; }
+    .pdf-mockup { position:relative; }
+    .pdf-shadow { position:absolute;inset:12px -12px -12px 12px;background:var(--blue);opacity:0.12;border-radius:4px; }
+    .pdf-cover { position:relative;background:var(--dark2);border:1px solid rgba(59,59,255,0.2);padding:2.5rem 2rem;aspect-ratio:3/4;display:flex;flex-direction:column;justify-content:space-between;border-radius:4px; }
+    .pdf-cover-eyebrow { font-family:'Montserrat',sans-serif;font-size:0.6rem;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:var(--blue-bright); }
+    .pdf-cover-title { font-family:'Montserrat',sans-serif;font-size:2.2rem;font-weight:900;text-transform:uppercase;line-height:0.95;letter-spacing:0; }
+    .pdf-cover-sub { font-size:0.75rem;color:rgba(255,255,255,0.48);line-height:1.5; }
+    .pdf-bar { height:3px;background:linear-gradient(90deg,var(--blue),var(--blue-bright));width:40%;margin:1rem 0;box-shadow:0 0 8px var(--blue-glow); }
+    .benefits-title { font-family:'Montserrat',sans-serif;font-size:0.65rem;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:var(--blue-bright);margin-bottom:1.5rem; }
+    .benefit { display:flex;gap:1rem;margin-bottom:1.5rem;align-items:flex-start; }
+    .benefit-num { font-family:'Montserrat',sans-serif;font-size:2rem;font-weight:900;color:rgba(59,59,255,0.18);line-height:1;min-width:2.5rem; }
+    .benefit-text h3 { font-family:'Montserrat',sans-serif;font-size:0.9rem;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;margin-bottom:0.3rem; }
+    .benefit-text p { font-size:0.85rem;color:rgba(255,255,255,0.52);line-height:1.6; }
+    .inside { background:var(--dark2);border:1px solid rgba(59,59,255,0.15);padding:1.5rem;margin-bottom:1.5rem;border-radius:4px; }
+    .inside-title { font-family:'Montserrat',sans-serif;font-size:0.6rem;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:var(--gray);margin-bottom:1rem; }
+    .inside-item { display:flex;align-items:center;gap:0.75rem;padding:0.55rem 0;border-bottom:1px solid rgba(59,59,255,0.06);font-size:0.85rem;color:rgba(255,255,255,0.68); }
+    .inside-item:last-child { border-bottom:none; }
+    .check { width:16px;height:16px;background:var(--blue);border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:9px;font-weight:700;box-shadow:0 0 6px rgba(59,59,255,0.4); }
+    .leads-panel { border-top:1px solid rgba(59,59,255,0.1);padding:3rem 0 4rem; }
+    .leads-head { display:flex;align-items:end;justify-content:space-between;gap:1rem;margin-bottom:1rem; }
+    .leads-head h2 { font-family:'Montserrat',sans-serif;font-size:1.35rem;letter-spacing:0;text-transform:uppercase; }
+    .lead-actions { display:flex;gap:0.75rem; }
+    .btn-secondary, .btn-danger { width:auto;padding:0.75rem 1rem;font-size:0.68rem; }
+    .btn-secondary { background:rgba(255,255,255,0.08);color:var(--white);border:1px solid rgba(255,255,255,0.14); }
+    .btn-danger { background:rgba(255,80,80,0.12);color:var(--red);border:1px solid rgba(255,80,80,0.22); }
+    .table-wrap { overflow-x:auto;border:1px solid rgba(59,59,255,0.15);border-radius:4px;background:rgba(18,18,31,0.75); }
+    table { width:100%;min-width:820px;border-collapse:collapse; }
+    th, td { padding:0.9rem 1rem;border-bottom:1px solid rgba(59,59,255,0.08);text-align:left; }
+    th { font-family:'Montserrat',sans-serif;font-size:0.64rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--gray); }
+    td { font-size:0.82rem;color:rgba(255,255,255,0.68); }
+    footer { border-top:1px solid rgba(59,59,255,0.08);padding:2rem 0;display:flex;justify-content:space-between;align-items:center;gap:1rem;font-size:0.7rem;color:rgba(255,255,255,0.22);font-family:'Montserrat',sans-serif;letter-spacing:0.06em; }
+    @keyframes fadeUp { from{opacity:0;transform:translateY(24px)} to{opacity:1;transform:translateY(0)} }
+    .hero-left { animation:fadeUp 0.7s ease both; }
+    .form-card { animation:fadeUp 0.7s 0.15s ease both; }
+    .magnet { animation:fadeUp 0.7s 0.3s ease both; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .spinner { display:inline-block;width:14px;height:14px;border:2px solid rgba(255,255,255,0.3);border-top-color:#fff;border-radius:50%;animation:spin 0.7s linear infinite;vertical-align:middle;margin-right:6px; }
+    @media(max-width:768px){
+      .page { padding:0 1.2rem; }
+      nav { align-items:flex-start;flex-direction:column; }
+      .hero, .magnet { grid-template-columns:1fr;gap:3rem; }
+      .stats { display:grid;grid-template-columns:1fr;gap:1rem; }
+      .divider-v { display:none; }
+      .form-card { padding:1.5rem; }
+      .leads-head { align-items:stretch;flex-direction:column; }
+      .lead-actions { display:grid;grid-template-columns:1fr 1fr; }
+      footer { flex-direction:column;align-items:flex-start; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="orb orb-1"></div>
+<div class="orb orb-2"></div>
+
+<div class="page">
+  <nav>
+    <div class="logo-wrap">
+      <div class="logo-icon" aria-hidden="true">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#6060ff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="5.5" cy="17.5" r="3.5"></circle><circle cx="18.5" cy="17.5" r="3.5"></circle>
+          <path d="M15 6a1 1 0 0 0-1-1h-1l-3.5 9H15V6z"></path>
+          <path d="M5.5 17.5 10 6h5l2 5H5.5"></path>
+        </svg>
+      </div>
+      <span class="logo-text">Cycleverse</span>
+    </div>
+    <div class="badge">Daily | 5PM RD Time</div>
+  </nav>
+
+  <section class="hero">
+    <div class="hero-left">
+      <p class="eyebrow">Pro Cycling | Every Day</p>
+      <h1>Follow elite cycling. Never miss a <em>pedal stroke</em>.</h1>
+      <p class="hero-desc">
+        Join the Cycleverse list and receive WorldTour news, elite training insights,
+        and gear picks in your inbox.
+      </p>
+      <div class="stats">
+        <div>
+          <div class="stat-num">Daily</div>
+          <div class="stat-label">Newsletter</div>
+        </div>
+        <div class="divider-v"></div>
+        <div>
+          <div class="stat-num">6M</div>
+          <div class="stat-label">Free Z2 Plan</div>
+        </div>
+        <div class="divider-v"></div>
+        <div>
+          <div class="stat-num">0</div>
+          <div class="stat-label">Spam</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-card" id="formCard">
+      <div class="gift-tag">Free</div>
+      <p class="form-title">Join Cycleverse</p>
+      <p class="form-sub">
+        Register with your name, phone number, and Gmail. You will receive the
+        6-Month Zone 2 Training Plan and daily professional cycling updates.
+      </p>
+
+      <form id="reservationForm" novalidate>
+        <div class="input-group">
+          <label for="name">Full name</label>
+          <input type="text" id="name" name="name" placeholder="John Cyclist" autocomplete="name" required>
+        </div>
+        <div class="input-group">
+          <label for="phone">Phone / WhatsApp</label>
+          <input type="tel" id="phone" name="phone" placeholder="+1 809 000 0000" autocomplete="tel" required>
+        </div>
+        <div class="input-group">
+          <label for="email">Gmail address</label>
+          <input type="email" id="email" name="email" placeholder="john@gmail.com" autocomplete="email" required>
+        </div>
+        <button class="btn-submit" id="submitBtn" type="submit">Join the newsletter</button>
+        <p class="form-legal">Your registration is submitted to the Cycleverse automation. The local list is only an emergency backup for the owner.</p>
+        <div class="message error" id="errorMsg"></div>
+        <div class="message success" id="successMsg"></div>
+      </form>
+    </div>
+  </section>
+
+  <section class="magnet">
+    <div class="pdf-mockup">
+      <div class="pdf-shadow"></div>
+      <div class="pdf-cover">
+        <div>
+          <div class="pdf-cover-eyebrow">Cycleverse | Exclusive Guide</div>
+          <div class="pdf-bar"></div>
+          <div class="pdf-cover-title">Zone 2<br>Training<br>Plan</div>
+        </div>
+        <div>
+          <div class="pdf-cover-sub">6 months of periodization | Week by week | Beginner to advanced levels</div>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <p class="benefits-title">What you get for free</p>
+      <div class="inside">
+        <div class="inside-title">Inside the Z2 plan</div>
+        <div class="inside-item"><div class="check">✓</div> 24 weeks of structured training</div>
+        <div class="inside-item"><div class="check">✓</div> How to calculate your exact Zone 2</div>
+        <div class="inside-item"><div class="check">✓</div> Progressive volume week by week</div>
+        <div class="inside-item"><div class="check">✓</div> Sessions for Zwift and outdoor rides</div>
+        <div class="inside-item"><div class="check">✓</div> Key metrics and how to read them</div>
+      </div>
+
+      <div class="benefit">
+        <div class="benefit-num">01</div>
+        <div class="benefit-text">
+          <h3>WorldTour news every day</h3>
+          <p>The most important stories in pro cycling, summarized clearly and curated for riders who want signal over noise.</p>
+        </div>
+      </div>
+
+      <div class="benefit">
+        <div class="benefit-num">02</div>
+        <div class="benefit-text">
+          <h3>Subscriber capture with follow-up</h3>
+          <p>Every subscriber includes name, phone, and Gmail. Use Brevo or Google Sheets as the main shared list.</p>
+        </div>
+      </div>
+
+      <div class="benefit">
+        <div class="benefit-num">03</div>
+        <div class="benefit-text">
+          <h3>5PM Dominican Republic time</h3>
+          <p>Perfect timing to read before an evening ride, after work, or before checking the next product drop.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="leads-panel" aria-label="Local subscriber backup">
+    <div class="leads-head">
+      <div>
+        <p class="benefits-title">Owner backup only</p>
+        <h2>Local emergency copy</h2>
+      </div>
+      <div class="lead-actions">
+        <button class="btn-secondary" type="button" id="exportCsv">Export CSV</button>
+        <button class="btn-danger" type="button" id="clearLeads">Clear list</button>
+      </div>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Phone</th>
+            <th>Gmail</th>
+          </tr>
+        </thead>
+        <tbody id="leadsTable">
+          <tr><td colspan="3">No local backup records yet.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <footer>
+    <span>© 2026 Cycleverse</span>
+    <span>Santiago, Dominican Republic</span>
+  </footer>
+</div>
+
+<script>
+  const N8N_WEBHOOK_URL = "PASTE_YOUR_N8N_PRODUCTION_WEBHOOK_URL_HERE";
+  const STORAGE_KEY = "cycleverseReservations";
+
+  const form = document.getElementById("reservationForm");
+  const submitBtn = document.getElementById("submitBtn");
+  const errorMsg = document.getElementById("errorMsg");
+  const successMsg = document.getElementById("successMsg");
+  const leadsTable = document.getElementById("leadsTable");
+  const exportCsv = document.getElementById("exportCsv");
+  const clearLeads = document.getElementById("clearLeads");
+
+  function getLeads() {
+    try {
+      return JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
+    } catch {
+      return [];
+    }
+  }
+
+  function saveLeads(leads) {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(leads));
+  }
+
+  function escapeHtml(value) {
+    return String(value).replace(/[&<>"']/g, function(character) {
+      return {
+        "&": "&amp;",
+        "<": "&lt;",
+        ">": "&gt;",
+        '"': "&quot;",
+        "'": "&#039;"
+      }[character];
+    });
+  }
+
+  function showMessage(type, text) {
+    errorMsg.style.display = "none";
+    successMsg.style.display = "none";
+    const target = type === "error" ? errorMsg : successMsg;
+    target.textContent = text;
+    target.style.display = "block";
+  }
+
+  function renderLeads() {
+    const leads = getLeads();
+    if (!leads.length) {
+      leadsTable.innerHTML = '<tr><td colspan="3">No local backup records yet.</td></tr>';
+      return;
+    }
+
+    leadsTable.innerHTML = leads.map(function(lead) {
+      return `
+        <tr>
+          <td>${escapeHtml(lead.name)}</td>
+          <td>${escapeHtml(lead.phone)}</td>
+          <td>${escapeHtml(lead.email)}</td>
+        </tr>
+      `;
+    }).join("");
+  }
+
+  function toCsvValue(value) {
+    return '"' + String(value).replaceAll('"', '""') + '"';
+  }
+
+  function downloadCsv() {
+    const leads = getLeads();
+    if (!leads.length) {
+      showMessage("error", "There are no local backup records to export yet.");
+      return;
+    }
+
+    const headers = ["Name", "Phone", "Gmail"];
+    const rows = leads.map(function(lead) {
+      return [lead.name, lead.phone, lead.email];
+    });
+    const csv = [headers].concat(rows).map(function(row) {
+      return row.map(toCsvValue).join(",");
+    }).join("\n");
+    const blob = new Blob([csv], { type: "text/csv;charset=utf-8" });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = "cycleverse-reservations.csv";
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
+    URL.revokeObjectURL(url);
+  }
+
+  async function sendToN8n(lead) {
+    if (N8N_WEBHOOK_URL.includes("PASTE_YOUR_N8N")) {
+      throw new Error("Missing n8n webhook URL");
+    }
+
+    const body = new URLSearchParams({
+      nombre: lead.name,
+      email: lead.email,
+      telefono: lead.phone,
+      source: "cycleverse-landing"
+    });
+
+    const response = await fetch(N8N_WEBHOOK_URL, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8"
+      },
+      body
+    });
+
+    if (!response.ok) {
+      throw new Error("n8n webhook returned an error");
+    }
+  }
+
+  form.addEventListener("submit", async function(event) {
+    event.preventDefault();
+
+    const data = new FormData(form);
+    const lead = {
+      name: String(data.get("name") || "").trim(),
+      phone: String(data.get("phone") || "").trim(),
+      email: String(data.get("email") || "").trim().toLowerCase()
+    };
+
+    if (!lead.name || !lead.phone || !lead.email) {
+      showMessage("error", "Please complete all fields.");
+      return;
+    }
+
+    if (!/^[^\\s@]+@gmail\\.com$/i.test(lead.email)) {
+      showMessage("error", "Please use a valid Gmail address ending in @gmail.com.");
+      return;
+    }
+
+    submitBtn.disabled = true;
+    submitBtn.innerHTML = '<span class="spinner"></span>Saving...';
+
+    const leads = getLeads();
+    leads.unshift(lead);
+    saveLeads(leads);
+    renderLeads();
+
+    try {
+      await sendToN8n(lead);
+      showMessage("success", "Registration saved and submitted to the Cycleverse automation. A local emergency copy was also kept.");
+      form.reset();
+    } catch {
+      showMessage("success", "Registration saved in the local emergency backup. Add the n8n production webhook URL to activate automatic emails.");
+    } finally {
+      submitBtn.disabled = false;
+      submitBtn.textContent = "Join the newsletter";
+    }
+  });
+
+  exportCsv.addEventListener("click", downloadCsv);
+
+  clearLeads.addEventListener("click", function() {
+    if (!getLeads().length) {
+      showMessage("error", "The local emergency backup is already empty.");
+      return;
+    }
+    if (!window.confirm("Clear all local emergency backup records on this browser?")) return;
+    saveLeads([]);
+    renderLeads();
+    showMessage("success", "Local emergency backup cleared.");
+  });
+
+  renderLeads();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,40 @@
+{
+  "name": "Cycleverse Newsletter Landing",
+  "language": "en",
+  "open_in_chrome": {
+    "file_url": "file:///C:/Users/delro/Documents/Codex/2026-05-20/xtccrea-una-landing-page-de-captura/cycleverse-landing-fixed.html",
+    "local_file": "C:/Users/delro/Documents/Codex/2026-05-20/xtccrea-una-landing-page-de-captura/cycleverse-landing-fixed.html"
+  },
+  "storage": {
+    "primary_platform": "Brevo or Google Sheets",
+    "recommended_setup": "Use Brevo for newsletter delivery and Google Sheets as a shared lead backup.",
+    "local_backup_type": "browser_localStorage",
+    "local_backup_key": "cycleverseReservations",
+    "note": "The CSV is only an emergency export. It should not be the main private database."
+  },
+  "n8n": {
+    "landing_webhook_constant": "N8N_WEBHOOK_URL",
+    "required_value": "Paste the n8n production webhook URL for the subscription workflow.",
+    "expected_payload": {
+      "nombre": "Subscriber full name",
+      "email": "Subscriber Gmail address",
+      "telefono": "Phone or WhatsApp",
+      "source": "cycleverse-landing"
+    },
+    "recommended_webhook_path": "ciclismo-pro/subscribe",
+    "send_format": "application/x-www-form-urlencoded"
+  },
+  "lead_fields": [
+    "name",
+    "phone",
+    "email"
+  ],
+  "csv_export": {
+    "file_name": "cycleverse-reservations.csv",
+    "headers": [
+      "Name",
+      "Phone",
+      "Gmail"
+    ]
+  }
+}
